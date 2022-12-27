@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-
+import auth from "../Routes/auth";
 class IndexRutas {
   app: Router;
   constructor() {
@@ -9,6 +9,7 @@ class IndexRutas {
 
   routes() {
     this.app.get("/", (req, res) => res.send("helo"));
+    this.app.use("/api", auth);
   }
 }
 

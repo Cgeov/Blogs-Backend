@@ -1,41 +1,26 @@
-import {Request,Response, Router} from 'express';
-import Post from "../models/Post";
+import { Request, Response, Router } from "express";
 
-class PostRutas{
-    router: Router;
-    constructor(){
-        this.router = Router();
-        this.routes();
-    }
+class PostRutas {
+  router: Router;
+  constructor() {
+    this.router = Router();
+    this.routes();
+  }
 
-    async getPosts(req: Request,res: Response){
-        const posts = await Post.find();
-        res.json(posts);
-    }
+  getPost() {}
 
-    getPost(){
+  createPost() {}
 
-    }
+  updatePost() {}
 
-    createPost(){
+  deletePost() {}
 
-    }
-
-    updatePost(){
-
-    }
-
-    deletePost(){
-
-    }
-
-    routes(){
-        this.router.get('/post',this.getPosts);
-        this.router.get('/post/:id',this.getPost);
-        this.router.post('/posts',this.createPost);
-        this.router.put('/posts/:id',this.updatePost);
-        this.router.delete('/post/:id',this.deletePost);
-    }
+  routes() {
+    this.router.get("/post/:id", this.getPost);
+    this.router.post("/posts", this.createPost);
+    this.router.put("/posts/:id", this.updatePost);
+    this.router.delete("/post/:id", this.deletePost);
+  }
 }
 const postRoutes = new PostRutas();
 export default postRoutes.router;

@@ -4,7 +4,7 @@ import helmet from "helmet";
 import mongoose from "mongoose";
 import compression from "compression";
 import cors from "cors";
-
+import * as dotenv from "dotenv";
 import Rutas from "./Routes/Rutas";
 import PostRutas from "./Routes/PostRutas";
 
@@ -14,13 +14,10 @@ class Server {
     this.app = express();
     this.config();
     this.route();
+    dotenv.config();
   }
 
   config() {
-    const MONGO_URI =
-      "mongodb+srv://cgeov:maxi1234@cluster0.d4fk8fx.mongodb.net/?retryWrites=true&w=majority";
-    mongoose.connect(MONGO_URI).then((db) => console.log("exito"));
-
     this.app.set("port", 4111);
     this.app.use(express.json());
     this.app.use(express.urlencoded());
@@ -35,6 +32,7 @@ class Server {
   }
 
   start() {
+    mongoose.connect(process.env.MONGO_URI!).then(() => console.log("exito"));
     this.app.listen(this.app.get("port"), () => {
       console.log("Server on port", this.app.get("port"));
     });
